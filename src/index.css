@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-surface: #131313;
+  --color-surface-dim: #0e0e0e;
+  --color-surface-card: #1b1b1b;
+  --color-surface-card-high: #1f1f1f;
+  --color-surface-card-highest: #2a2a2a;
+  --color-on-surface: #e2e2e2;
+  --color-on-surface-variant: #e7bdb7;
+  
+  --color-primary-accent: #ff3b30; /* Electric Signal Red */
+  --color-primary-container: #ff5545; /* Soft vibrant orange/red */
+}
+
+@layer base {
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-mono);
+  }
+
+  /* Custom scrollbar matching design system */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0e0e0e;
+    border-left: 1px solid rgba(226, 226, 226, 0.1);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ff5545;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff3b30;
+  }
+}
+
+/* Custom animation utilities */
+@keyframes grid-pulse {
+  0% { opacity: 0.05; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0.05; }
+}
+
+.grid-line-glow {
+  box-shadow: 0 0 15px rgba(255, 85, 69, 0.15);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 85, 69, 0.4);
+}
+
+.text-glow-white {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* scanline scan effect */
+.scanline-pulse {
+  position: relative;
+  overflow: hidden;
+}
+.scanline-pulse::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgba(255, 85, 69, 0.15), transparent);
+  pointer-events: none;
+  animation: scanline-infinite 3s linear infinite;
+}
+
+@keyframes scanline-infinite {
+  0% { top: -100%; }
+  100% { top: 200%; }
+}
+
+/* Custom transitions and scroll animations */
+.transition-reveal {
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
