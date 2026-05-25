@@ -8,7 +8,7 @@ export const PROJECTS: Project[] = [
     tagline: 'A clean memorial repository and digital tombstone network for keeping memories intact.',
     category: 'WEBAPP',
     description: 'Developed as a digital sanctuary to archive dropped ideas, deprecated lines of code, and nostalgic web projects that deserve a beautiful final resting place. Bridges raw minimalist styling with robust decentralized static hosting.',
-    image: '/src/assets/images/regenerated_image_1779605572562.png',
+    image: '/images/regenerated_image_1779605572562.png',
     techStack: ['React', 'IPFS/IPNS', 'TailwindCSS 4', 'Vite', 'Three.js GLSL'],
     duration: '3 Weeks (Experimental Project)',
     role: 'Lead Developer & Creative Director',
