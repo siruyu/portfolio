@@ -48,6 +48,22 @@ export const PROJECTS: Project[] = [
     solutions: 'Designed an elegant rem-scaling modular fluid grid, leveraging modern container queries and clamp functions for seamless density control.',
     liveUrl: 'https://ais-dev-zxax54s43u5zw4m74mm7yz-603573215949.asia-southeast1.run.app',
     githubUrl: 'https://github.com/siruyu/Musica'
+  },
+  {
+    id: 'evolve',
+    number: '03',
+    title: 'Evolve',
+    tagline: 'A multi-disciplinary creative agency blending brand direction, advanced technology, and performance marketing into one connected approach.',
+    category: 'AGENCY',
+    description: 'Evolve is a multi-disciplinary creative agency that blends brand direction, advanced technology, and performance marketing into one connected approach. We build authentic connections between brands and people — where every experience, physical or digital, becomes part of the same story.',
+    image: '/images/2.png',
+    techStack: ['Next.js 15', 'TypeScript', 'Tailwind CSS 4', 'Motion', 'PostCSS', 'Lenis'],
+    duration: '4 Weeks (Agency Platform)',
+    role: 'Full Stack Developer & Creative Director',
+    challenges: 'Building a feature-rich agency website with a custom video hero, smooth Lenis scrolling, interactive service accordion, project slider with live KPIs, marquee ticker, and newsletter signup — all requiring precise animation timing and fast load performance across multiple sections.',
+    solutions: 'Leveraged Next.js 15 App Router for server-component-first architecture and optimal code splitting. Used Motion for declarative spring animations, integrated Lenis for jank-free smooth scrolling, and built the entire UI with Tailwind CSS 4 + PostCSS for a minimal stylesheet footprint.',
+    githubUrl: 'https://github.com/siruyu/evolve-agency',
+    liveUrl: 'https://madewithevolve.vercel.app'
   }
 ];
 

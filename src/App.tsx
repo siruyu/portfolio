@@ -328,7 +328,7 @@ export default function App() {
             {/* SECONDARY CASES: MUSICA */}
             <div 
               onClick={() => setSelectedProject(PROJECTS[1])}
-              className="md:col-span-6 border border-[#e2e2e2]/10 bg-surface-card/20 backdrop-blur-md p-6 md:p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-container/50 hover:bg-primary-container/5 transition-all duration-300"
+              className="md:col-span-4 border border-[#e2e2e2]/10 bg-surface-card/20 backdrop-blur-md p-6 md:p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-container/50 hover:bg-primary-container/5 transition-all duration-300"
             >
               <div className="flex justify-between items-start mb-12">
                 <span className="font-sans text-5xl font-extrabold text-[#e2e2e2]/20 group-hover:text-primary-container transition-all">
@@ -355,7 +355,7 @@ export default function App() {
             {/* SECONDARY CASES: UI/UX Architecture */}
             <div 
               onClick={() => setSelectedProject(PROJECTS[2])}
-              className="md:col-span-6 border border-[#e2e2e2]/10 bg-surface-card/20 backdrop-blur-md p-6 md:p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-container/50 hover:bg-surface-card-high/40 transition-all duration-300"
+              className="md:col-span-4 border border-[#e2e2e2]/10 bg-surface-card/20 backdrop-blur-md p-6 md:p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-container/50 hover:bg-surface-card-high/40 transition-all duration-300"
             >
               <div className="flex justify-between items-start mb-12">
                 <span className="font-sans text-5xl font-extrabold text-[#e2e2e2]/20 group-hover:text-white transition-all">
@@ -375,6 +375,33 @@ export default function App() {
                 </h4>
                 <p className="font-mono text-xs text-[#e2e2e2]/70 leading-relaxed">
                   {PROJECTS[2].tagline}
+                </p>
+              </div>
+            </div>
+
+            {/* SECONDARY CASES: Evolve Agency */}
+            <div 
+              onClick={() => setSelectedProject(PROJECTS[3])}
+              className="md:col-span-4 border border-[#e2e2e2]/10 bg-surface-card/20 backdrop-blur-md p-6 md:p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-container/50 hover:bg-primary-container/5 transition-all duration-300"
+            >
+              <div className="flex justify-between items-start mb-12">
+                <span className="font-sans text-5xl font-extrabold text-[#e2e2e2]/20 group-hover:text-primary-container transition-all">
+                  03
+                </span>
+                <div className="w-9 h-9 border border-[#e2e2e2]/10 flex items-center justify-center text-primary-container/80 group-hover:rotate-45 transition-transform bg-[#131313]/60">
+                  <ArrowUpRight className="w-[18px] h-[18px]" />
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <span className="font-mono text-[10px] text-primary-container font-bold uppercase tracking-widest bg-primary-container/10 px-2 py-0.5 border border-primary-container/20 inline-block">
+                  {PROJECTS[3].category}
+                </span>
+                <h4 className="font-sans text-2xl font-extrabold uppercase text-[#e2e2e2] tracking-tight group-hover:text-primary-container transition-colors">
+                  {PROJECTS[3].title}
+                </h4>
+                <p className="font-mono text-xs text-[#e2e2e2]/70 leading-relaxed">
+                  {PROJECTS[3].tagline}
                 </p>
               </div>
             </div>
