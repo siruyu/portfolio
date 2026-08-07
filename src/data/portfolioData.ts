@@ -2,8 +2,53 @@ import { Project, Capability } from '../types';
 
 export const PROJECTS: Project[] = [
   {
-    id: 'ossuary',
+    id: 'tbrls',
     number: '00',
+    title: 'TBRLS',
+    tagline: 'Token Bucket Rate Limiter Service — a standalone, networked rate-limiting service with persistent state, admin API, and horizontal scalability.',
+    category: 'BACKEND_SERVICE',
+    description: 'A production-grade, networked rate-limiting service implementing Token Bucket and Sliding Window algorithms with PostgreSQL-persisted state. Enforces shared limits across service replicas via advisory locks, exposes runtime client configuration through a full admin API with named accounts and key rotation, returns standard X-RateLimit-* headers, and propagates config changes across replicas in milliseconds via LISTEN/NOTIFY. Ships a built-in React console, OpenTelemetry tracing, and k6-verified concurrency safety (500+ RPS, zero double-spends, p99 < 50ms).',
+    image: '/images/3.png',
+    techStack: ['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'React', 'k6', 'OpenTelemetry'],
+    duration: '10-Week Production Build',
+    role: 'Lead Backend Engineer & Systems Architect',
+    challenges: 'Guaranteeing atomic check-and-consume with zero double-spends under 500+ RPS concurrent load, and sharing exact bucket state across replicas without a message bus.',
+    solutions: 'PostgreSQL advisory locks with single-transaction atomic check-and-consume, plus config propagation across replicas via LISTEN/NOTIFY. Correctness proven with k6 load tests: p99 < 50ms, 0% errors, exact ALLOW/DENY counts.',
+    githubUrl: 'https://github.com/siruyu/tbrls'
+  },
+  {
+    id: 'apisim',
+    number: '01',
+    title: 'APISIM',
+    tagline: 'Tiered API Business Simulator — a stateless gateway that demonstrates the TBRLS platform working live inside a realistic multi-tenant API business.',
+    category: 'GATEWAY_DEMO',
+    description: 'A thin, stateless gateway in front of TBRLS that makes every rate-limiting feature visible, exerciseable, and demonstrable in real time. Wraps /api/v1/check directly and never reimplements rate limiting, forwarding X-RateLimit-* headers byte-for-byte and failing closed (503 + Retry-After) when TBRLS is unreachable. Ships a four-tab React console (Overview, Playground, Operate, Live), three seeded demo customers exercising both algorithms simultaneously, a continuous traffic simulator with weighted-cost payloads, and a scripted operator playbook covering live tier bumps, bucket refill/reset, new tenants, and admin key rotation.',
+    image: '/images/4.png',
+    techStack: ['Python', 'FastAPI', 'React', 'Vite', 'Tailwind', 'TBRLS'],
+    duration: '6-Week Build',
+    role: 'Full Stack Developer',
+    challenges: 'Making TBRLS live-enforceable and demoable end-to-end — byte-for-byte header fidelity, a fail-safe relay with no silent ALLOW, and a console that turns real-time tier enforcement into a readable story.',
+    solutions: 'A pure transparent wrapper over /api/v1/check with verbatim header forwarding, 503 + Retry-After on relay failure, and a four-tab React console plus scripted playbook for live tier changes, bucket ops, and weighted-cost demos.'
+  },
+  {
+    id: 'evolve',
+    number: '02',
+    title: 'Evolve',
+    tagline: 'A multi-disciplinary creative agency blending brand direction, advanced technology, and performance marketing into one connected approach.',
+    category: 'AGENCY',
+    description: 'Evolve is a multi-disciplinary creative agency that blends brand direction, advanced technology, and performance marketing into one connected approach. We build authentic connections between brands and people — where every experience, physical or digital, becomes part of the same story.',
+    image: '/images/2.png',
+    techStack: ['Next.js 15', 'TypeScript', 'Tailwind CSS 4', 'Motion', 'PostCSS', 'Lenis'],
+    duration: '4 Weeks (Agency Platform)',
+    role: 'Full Stack Developer & Creative Director',
+    challenges: 'Building a feature-rich agency website with a custom video hero, smooth Lenis scrolling, interactive service accordion, project slider with live KPIs, marquee ticker, and newsletter signup — all requiring precise animation timing and fast load performance across multiple sections.',
+    solutions: 'Leveraged Next.js 15 App Router for server-component-first architecture and optimal code splitting. Used Motion for declarative spring animations, integrated Lenis for jank-free smooth scrolling, and built the entire UI with Tailwind CSS 4 + PostCSS for a minimal stylesheet footprint.',
+    githubUrl: 'https://github.com/siruyu/evolve-agency',
+    liveUrl: 'https://madewithevolve.vercel.app'
+  },
+  {
+    id: 'ossuary',
+    number: '03',
     title: 'Ossuary. digital graveyard',
     tagline: 'A clean memorial repository and digital tombstone network for keeping memories intact.',
     category: 'WEBAPP',
@@ -19,7 +64,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'musica',
-    number: '01',
+    number: '04',
     title: 'MUSICA',
     tagline: 'Cloud music streaming platform with deep custom synthesized spatial filters and dynamic waveforms.',
     category: 'CLOUD_SUITE',
@@ -35,7 +80,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'ui-ux',
-    number: '02',
+    number: '05',
     title: 'UI/UX ARCHITECTURE',
     tagline: 'Professional portfolio layouts focused on absolute typographic alignment and modular fluid grids.',
     category: 'DESIGN_ENGINE',
@@ -48,22 +93,6 @@ export const PROJECTS: Project[] = [
     solutions: 'Designed an elegant rem-scaling modular fluid grid, leveraging modern container queries and clamp functions for seamless density control.',
     liveUrl: 'https://ais-dev-zxax54s43u5zw4m74mm7yz-603573215949.asia-southeast1.run.app',
     githubUrl: 'https://github.com/siruyu/Musica'
-  },
-  {
-    id: 'evolve',
-    number: '03',
-    title: 'Evolve',
-    tagline: 'A multi-disciplinary creative agency blending brand direction, advanced technology, and performance marketing into one connected approach.',
-    category: 'AGENCY',
-    description: 'Evolve is a multi-disciplinary creative agency that blends brand direction, advanced technology, and performance marketing into one connected approach. We build authentic connections between brands and people — where every experience, physical or digital, becomes part of the same story.',
-    image: '/images/2.png',
-    techStack: ['Next.js 15', 'TypeScript', 'Tailwind CSS 4', 'Motion', 'PostCSS', 'Lenis'],
-    duration: '4 Weeks (Agency Platform)',
-    role: 'Full Stack Developer & Creative Director',
-    challenges: 'Building a feature-rich agency website with a custom video hero, smooth Lenis scrolling, interactive service accordion, project slider with live KPIs, marquee ticker, and newsletter signup — all requiring precise animation timing and fast load performance across multiple sections.',
-    solutions: 'Leveraged Next.js 15 App Router for server-component-first architecture and optimal code splitting. Used Motion for declarative spring animations, integrated Lenis for jank-free smooth scrolling, and built the entire UI with Tailwind CSS 4 + PostCSS for a minimal stylesheet footprint.',
-    githubUrl: 'https://github.com/siruyu/evolve-agency',
-    liveUrl: 'https://madewithevolve.vercel.app'
   }
 ];
 

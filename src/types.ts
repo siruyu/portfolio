@@ -29,12 +29,3 @@ export interface ContactMessage {
   message: string;
   timestamp: string;
 }
-
-export interface SystemSettings {
-  accentColor: 'red' | 'cyan' | 'lime' | 'amber';
-  sphereSpeed: number; // 0.1 to 3
-  particleDensity: number; // 100 to 1000
-  showGridLines: boolean;
-  wireframeStyle: 'points-and-lines' | 'lines' | 'points';
-  matrixRain: boolean;
-}

@@ -1,5 +1,4 @@
-import React from 'react';
-import { X, ArrowRight, Github, ExternalLink, Cpu, Terminal } from 'lucide-react';
+import { motion } from 'motion/react';
 import { Project } from '../types';
 
 interface ProjectModalProps {
@@ -11,133 +10,162 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-end bg-surface-dim/80 backdrop-blur-md transition-opacity duration-300">
-      {/* Outer transparent backdrop to dismiss */}
-      <div className="absolute inset-0" onClick={onClose} />
+    <motion.div
+      className="fixed inset-0 z-[80] flex justify-end"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+    >
+      <div className="absolute inset-0 bg-crt/70" onClick={onClose} />
 
-      {/* Main modal slate drawer panel */}
-      <div className="relative w-full max-w-2xl h-full bg-[#131313] border-l border-[#e2e2e2]/10 p-8 md:p-12 overflow-y-auto flex flex-col justify-between z-10 shadow-2xl animate-in slide-in-from-right duration-300">
-        
-        {/* Header toolbar controls */}
-        <div>
-          <div className="flex justify-between items-center border-b border-[#e2e2e2]/10 pb-6 mb-8">
-            <span className="font-mono text-xs text-primary-container font-bold tracking-[0.2em] uppercase">
-              CASE ARCHIVE // SYSTEM_{project.number}
+      <motion.aside
+        className="relative w-full max-w-2xl h-full bg-crt-1 border-l border-line overflow-y-auto"
+        initial={{ x: '100%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '100%' }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="absolute inset-0 crt-scanlines pointer-events-none opacity-60" />
+
+        {/* corner brackets */}
+        <span className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-hazard" />
+        <span className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-hazard" />
+        <span className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-hazard" />
+        <span className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-hazard" />
+
+        <div className="relative p-6 md:p-10 flex flex-col min-h-full">
+          {/* header */}
+          <div className="flex justify-between items-center border-b border-line pb-4 mb-8">
+            <span className="text-[10px] tracking-[0.25em] text-hazard red-glow font-bold">
+              CASE_ARCHIVE // SYSTEM_{project.number}
             </span>
             <button
               onClick={onClose}
-              className="group bg-surface-card hover:bg-primary-container border border-[#e2e2e2]/10 hover:border-transparent p-2 text-[#e2e2e2] hover:text-surface transition-colors duration-200"
-              aria-label="Close panel"
+              className="text-phos-dim hover:bg-hazard hover:text-crt px-3 py-2 text-xs font-bold border border-line hover:border-hazard transition-colors"
             >
-              <X className="w-4 h-4 transition-transform group-hover:rotate-90" />
+              [ X CLOSE ]
             </button>
           </div>
 
-          {/* Large display titles */}
+          {/* title block */}
           <div className="space-y-4">
-            <span className="font-mono text-xs text-[#e2e2e2]/40 bg-[#e2e2e2]/5 px-3 py-1 inline-block border border-[#e2e2e2]/10 uppercase tracking-widest">
+            <span className="text-[9px] tracking-[0.25em] text-phos-dim border border-line bg-crt-2 px-2 py-1 inline-block">
               {project.category}
             </span>
-            <h3 className="font-sans text-4xl md:text-5xl font-extrabold text-[#e2e2e2] uppercase leading-none tracking-tighter">
+            <h3 className="font-display uppercase leading-[0.9] tracking-tight text-[clamp(1.8rem,6vw,3.2rem)]">
               {project.title}
             </h3>
-            <p className="font-mono text-sm text-primary-container italic mt-2">
-              {project.tagline}
-            </p>
+            <p className="text-sm text-phos-dim">{project.tagline}</p>
           </div>
 
-          {/* Quick specs section */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6 mt-8 border-t border-b border-[#e2e2e2]/10 py-6">
-            <div>
-              <span className="font-sans text-[10px] text-[#e2e2e2]/40 uppercase tracking-wider block">CHRONO TIMELINE</span>
-              <span className="font-mono text-xs text-[#e2e2e2] font-semibold">{project.duration}</span>
+          {/* spec table */}
+          <dl className="mt-8 grid grid-cols-2 gap-px bg-line border border-line">
+            <div className="bg-crt p-4">
+              <dt className="text-[9px] tracking-[0.22em] text-phos-faint">CHRONO_TIMELINE</dt>
+              <dd className="mt-1 text-xs text-phos font-bold">{project.duration}</dd>
             </div>
-            <div>
-              <span className="font-sans text-[10px] text-[#e2e2e2]/40 uppercase tracking-wider block">METRIC ROLE</span>
-              <span className="font-mono text-xs text-[#e2e2e2] font-semibold">{project.role}</span>
+            <div className="bg-crt p-4">
+              <dt className="text-[9px] tracking-[0.22em] text-phos-faint">METRIC_ROLE</dt>
+              <dd className="mt-1 text-xs text-phos font-bold">{project.role}</dd>
             </div>
-            <div className="col-span-2 md:col-span-1">
-              <span className="font-sans text-[10px] text-[#e2e2e2]/40 uppercase tracking-wider block">STACK MODULES</span>
-              <div className="flex flex-wrap gap-1 mt-1">
-                {project.techStack.map((tech) => (
-                  <span key={tech} className="font-mono text-[9px] bg-surface-card-highest text-[#e2e2e2]/80 border border-[#e2e2e2]/10 px-1.5 py-0.5">
-                    {tech}
+            <div className="bg-crt p-4 col-span-2">
+              <dt className="text-[9px] tracking-[0.22em] text-phos-faint">STACK_MODULES</dt>
+              <dd className="mt-2 flex flex-wrap gap-2">
+                {project.techStack.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[9px] tracking-[0.15em] text-phos-dim border border-line px-2 py-1"
+                  >
+                    {t}
                   </span>
                 ))}
-              </div>
+              </dd>
             </div>
-          </div>
+          </dl>
 
-          {/* Rich content breakdown */}
+          {/* body blocks */}
           <div className="mt-8 space-y-8">
-            <div>
-              <h4 className="font-sans text-xs text-[#e2e2e2] font-bold uppercase tracking-widest flex items-center gap-2 mb-2">
-                <Terminal className="w-3.5 h-3.5 text-primary-container" /> PROJECT EXECUTIVES OVERVIEW
-              </h4>
-              <p className="font-mono text-[13px] text-[#e2e2e2]/80 leading-relaxed">
-                {project.description}
-              </p>
-            </div>
+            <Block title="PROJECT_OVERVIEW">{project.description}</Block>
+            <Block title="ENCOUNTERED_ROADBLOCKS" accent>
+              {project.challenges}
+            </Block>
+            <Block title="SOLUTION_IMPL" frame>
+              {project.solutions}
+            </Block>
 
+            {/* blueprint diagnostic */}
             <div>
-              <h4 className="font-sans text-xs text-[#e2e2e2] font-bold uppercase tracking-widest flex items-center gap-2 mb-2">
-                <Cpu className="w-3.5 h-3.5 text-primary-container" /> ENCOUNTERED ROADBLOCKS
-              </h4>
-              <p className="font-mono text-[13px] text-[#e2e2e2]/80 leading-relaxed border-l-2 border-primary-accent/40 pl-4 py-1">
-                {project.challenges}
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-sans text-xs text-[#e2e2e2] font-bold uppercase tracking-widest flex items-center gap-2 mb-2">
-                <ArrowRight className="w-3.5 h-3.5 text-primary-container" /> SOLUTION IMPLEMENTATION
-              </h4>
-              <p className="font-mono text-[13px] text-[#e2e2e2]/80 leading-relaxed bg-[#e2e2e2]/5 p-4 border border-[#e2e2e2]/10 select-all">
-                {project.solutions}
-              </p>
-            </div>
-
-            {/* Simulated Architecture Blueprint Section */}
-            <div>
-              <span className="font-sans text-[10px] text-[#e2e2e2]/30 uppercase tracking-widest block mb-2 font-bold">SYSTEM DIAGNOSTIC MAP</span>
-              <pre className="p-4 bg-surface-dim border border-[#e2e2e2]/10 text-[10px] text-primary-container/80 font-mono rounded overflow-x-auto">
-                {`{
-  "system_id": "0x${project.id.toUpperCase()}_DEV",
-  "deployment_cluster": "cloud-ingress-node-asia",
-  "runtime_status": "PROD_STABLE_VERIFIED",
-  "compression_ratio": "5.45:1",
+              <span className="text-[9px] tracking-[0.22em] text-phos-faint font-bold block mb-2">
+                SYSTEM_DIAGNOSTIC_MAP
+              </span>
+              <pre className="p-4 bg-crt border border-line text-[10px] text-hazard red-glow overflow-x-auto">
+{`{
+  "system_id"    : "0x${project.id.toUpperCase()}_DEV",
+  "cluster"      : "cloud-ingress-node-asia",
+  "runtime"      : "PROD_STABLE_VERIFIED",
+  "compression"  : "5.45:1",
   "frame_overhead": "0.45ms",
-  "memory_leak_check": "0_ERR_DETECTOR"
+  "mem_leak"     : "0_ERR_DETECTOR"
 }`}
               </pre>
             </div>
           </div>
-        </div>
 
-        {/* Footer toolbar actions */}
-        <div className="mt-12 pt-6 border-t border-[#e2e2e2]/10 flex flex-col sm:flex-row gap-4">
-          <a
-            href={project.liveUrl || "#"}
-            className="flex-1 flex justify-between items-center bg-primary-container hover:bg-white text-[#131313] font-mono hover:text-[#131313] p-4 text-xs font-bold uppercase tracking-widest transition-colors duration-300"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span>LIVE DEPLOYMENT</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-          
-          <a
-            href={project.githubUrl || "#"}
-            className="flex-1 flex justify-between items-center bg-surface-card hover:bg-surface-card-highest text-[#e2e2e2] font-mono p-4 text-xs border border-[#e2e2e2]/10 hover:border-primary-container/40 transition-all duration-300"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span>REPOS SOURCE</span>
-            <Github className="w-3.5 h-3.5 text-primary-container" />
-          </a>
+          {/* actions */}
+          <div className="mt-10 pt-6 border-t border-line flex flex-col sm:flex-row gap-3 mt-auto">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex-1 flex justify-between items-center bg-hazard text-crt font-display text-xs tracking-[0.2em] px-5 py-4 hover:bg-crt hover:text-phos hover:border hover:border-hazard transition-colors"
+              >
+                <span>[ LIVE DEPLOYMENT ]</span>
+                <span>&gt;&gt;&gt;</span>
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex-1 flex justify-between items-center border border-line-hi text-phos text-xs tracking-[0.2em] px-5 py-4 hover:border-hazard hover:text-hazard transition-colors"
+              >
+                <span>&lt; REPOS_SOURCE &gt;</span>
+                <span>GIT</span>
+              </a>
+            )}
+          </div>
         </div>
+      </motion.aside>
+    </motion.div>
+  );
+}
 
-      </div>
+function Block({
+  title,
+  accent,
+  frame,
+  children,
+}: {
+  title: string;
+  accent?: boolean;
+  frame?: boolean;
+  children: string;
+}) {
+  return (
+    <div>
+      <span className="text-[9px] tracking-[0.22em] text-phos-faint font-bold block mb-2">
+        {accent ? '!' : '//'} {title}
+      </span>
+      <p
+        className={`text-[13px] leading-relaxed text-phos-dim ${
+          frame ? 'bg-crt-2 p-4 border border-line' : ''
+        } ${accent ? 'border-l-2 border-hazard pl-4' : ''}`}
+      >
+        {children}
+      </p>
     </div>
   );
 }
