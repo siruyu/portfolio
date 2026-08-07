@@ -77,7 +77,7 @@ export default function Contact() {
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-5">
-      {phase === 'error' && (
+      {error && phase !== 'sending' && (
         <div className="border border-hazard bg-hazard/10 p-3 text-[10px] text-phos flex gap-2">
           <span className="text-hazard">!</span>
           <span>{error}</span>
