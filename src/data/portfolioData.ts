@@ -28,7 +28,8 @@ export const PROJECTS: Project[] = [
     duration: '6-Week Build',
     role: 'Full Stack Developer',
     challenges: 'Making TBRLS live-enforceable and demoable end-to-end — byte-for-byte header fidelity, a fail-safe relay with no silent ALLOW, and a console that turns real-time tier enforcement into a readable story.',
-    solutions: 'A pure transparent wrapper over /api/v1/check with verbatim header forwarding, 503 + Retry-After on relay failure, and a four-tab React console plus scripted playbook for live tier changes, bucket ops, and weighted-cost demos.'
+    solutions: 'A pure transparent wrapper over /api/v1/check with verbatim header forwarding, 503 + Retry-After on relay failure, and a four-tab React console plus scripted playbook for live tier changes, bucket ops, and weighted-cost demos.',
+    githubUrl: 'https://github.com/siruyu/apisim'
   },
   {
     id: 'evolve',

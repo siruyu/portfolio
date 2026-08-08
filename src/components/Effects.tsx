@@ -35,9 +35,6 @@ export default function Effects() {
         <span className="absolute top-2 left-6 text-[9px] tracking-[0.2em] text-phos-faint">
           + 0,0
         </span>
-        <span className="absolute bottom-2 right-6 text-[9px] tracking-[0.2em] text-phos-faint">
-          FRAME:SHARP // 60HZ
-        </span>
       </div>
     </>
   );
